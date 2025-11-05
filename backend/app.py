@@ -1,4 +1,5 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
 import tempfile
@@ -16,6 +17,15 @@ app = FastAPI(
     title="Vehicle Type Prediction API",
     description="Predict vehicle types from images",
     version="1.0.0"
+)
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -38,7 +48,6 @@ async def predict_from_upload(file: UploadFile = File(...)):
         if file_ext not in valid_ext:
             raise HTTPException(status_code=400, detail=f"Invalid file type. Use: {valid_ext}")
         
-        # Save temporarily
         with tempfile.NamedTemporaryFile(delete=False, suffix=file_ext) as tmp:
             content = await file.read()
             tmp.write(content)
