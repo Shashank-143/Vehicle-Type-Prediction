@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { config } from "@/config";
 import { 
   Upload, 
   ImageIcon, 
@@ -93,7 +94,7 @@ export default function Home() {
       const formData = new FormData();
       formData.append('file', selectedFile);
 
-      const response = await fetch('http://localhost:8000/predict-upload', {
+      const response = await fetch(`${config.apiBaseUrl}/predict-upload`, {
         method: 'POST',
         body: formData,
       });
@@ -487,7 +488,7 @@ export default function Home() {
               for the community
             </p>
             <a
-              href="https://github.com"
+              href="https://github.com/Shashank-143/Vehicle-Type-Prediction.git"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
