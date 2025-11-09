@@ -19,7 +19,12 @@ app = FastAPI(
     version="1.0.0"
 )
 
-origins = ["https://vehicle.shashankgoel.tech","https://vehicle-type-prediction-shashank-143s-projects.vercel.app"]  
+origins = [
+    "https://vehicle.shashankgoel.tech",
+    "https://vehicle-type-prediction.vercel.app",
+    "https://vehicle-type-prediction-shashank-143s-projects.vercel.app",
+    "http://localhost:3000"  # For local development
+]
 
 app.add_middleware(
     CORSMiddleware,
